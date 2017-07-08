@@ -31,6 +31,8 @@ import java.util.Scanner;
 
 import org.json.*;
 
+// VERSÃO 1.0
+
 // Classe responsável por resgatar o arquivo .json de uma API pública
 // ==================================================================
 public class GetJSON {
