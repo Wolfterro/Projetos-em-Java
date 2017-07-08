@@ -57,12 +57,12 @@ public class GetJSON {
 			
 			InputStream stream = (InputStream) conn.getContent();
 
-            Scanner s = new Scanner(stream);
-            s.useDelimiter("\\A");
-            String res = s.hasNext() ? s.next() : "";
-            s.close();
+			Scanner s = new Scanner(stream);
+			s.useDelimiter("\\A");
+			String res = s.hasNext() ? s.next() : "";
+			s.close();
 
-            obj = new JSONObject(res);
+			obj = new JSONObject(res);
 		}
 		catch(MalformedURLException e) {
 			e.printStackTrace();
