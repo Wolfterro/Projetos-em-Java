@@ -22,3 +22,18 @@
     cd Projetos-em-Java/CalculoIMC
     javac CalculoIMC.java
     java CalculoIMC
+
+## Classes de Ajuda
+
+### Descrição:
+
+#### São pequenas classes em Java que possuem a função de ajudar o desenvolvedor a construir aplicações de forma mais rápida, sem que haja necessidade de criar diversas implementações o tempo todo.
+#### Para usá-las, basta alterar o package informado no arquivo para o package de seu projeto e insira o arquivo junto aos arquivos de código-fonte de seu projeto.
+#### Para visualizar quais classes estão disponíveis, verifique o arquivo README.md disponível dentro da pasta.
+
+### Download:
+
+#### Utilize o git para clonar o repositório:
+
+    git clone https://github.com/Wolfterro/Projetos-em-Java.git
+    cd "Projetos-em-Java/Classes de Ajuda"
