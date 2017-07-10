@@ -8,3 +8,10 @@
 
 #### Requerimentos:
  - org.json
+
+#### Exemplo de uso:
+
+```Java
+GetJSON g = new GetJSON("https://example.com/json");
+JSONObject j = g.get();
+```
