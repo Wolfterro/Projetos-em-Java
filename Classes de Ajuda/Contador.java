@@ -24,6 +24,8 @@ SOFTWARE.
 
 import java.time.*;
 
+// VERSÃO 1.0
+
 public class Contador extends Thread {
 	// Propriedades privadas
 	// =====================
