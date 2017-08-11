@@ -26,7 +26,7 @@ JSONObject j = g.get();
 // Retorna o tempo formatado em String
 public String getTimeFormatted();
 
-// Retorna o tempo em segundos
+// Retorna o tempo (segundos) em int
 public int getTime();
 ```
 
