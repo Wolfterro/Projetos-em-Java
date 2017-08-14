@@ -21,18 +21,18 @@ JSONObject j = g.get();
 
 ##### Esta pequena classe possui a função de criar um pequeno relógio que poderá ser utilizado como um contador de tempo de execução do programa ou de outras funções essenciais do programa, como o tempo de execução de um método ou loop ou o tempo entre um método e outro.
 
-##### É possível iniciar um objeto Contador de duas maneiras: Sem tempo limite ou com tempo limite.
-##### Caso utilize um tempo limite estabelecido, o contador irá encerrar automaticamente quando o tempo se esgotar e não haverá necessidade de encerrá-lo manualmente.
+##### É possível iniciar um objeto Contador de duas maneiras: Sem tempo limite ou com tempo limite, em segundos.
+##### Caso utilize um tempo limite estabelecido, o contador irá encerrar automaticamente quando chegar a marca estabelecida e não haverá necessidade de encerrá-lo manualmente.
 
 ##### Veja os exemplos abaixo:
 ```Java
 // Contador sem tempo limite
-Contador c = new Contador();
-c.start();
+Contador d = new Contador();
+d.start();
 
 // Contador com tempo limite (em segundos)
-Contador d = new Contador(45);
-d.start();
+Contador c = new Contador(45);
+c.start();
 ```
 
 ##### O contador poderá retornar três tipos de dados utilizando três métodos disponíveis:
