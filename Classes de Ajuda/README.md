@@ -85,5 +85,5 @@ while(c.isRunning()) {
 	System.out.print(msg);
 	System.out.flush();
 }
-```
+System.out.println("");
 ```
