@@ -111,7 +111,7 @@ Logg o = new Logg("CustomLogg.txt");
 Logg g = new Logg("/home/user/CustomLogg.txt");
 ```
 
-##### A classe possui duas maneiras de você inserir uma mensagem no arquivo de registro: Sem data e hora ou com data e hora inseridos.
+##### A classe possui duas maneiras de você inserir uma mensagem no arquivo de registro: Sem data e hora ou com data e hora inseridos no início da mensagem.
 ```Java
 // Escrevendo no arquivo de log sem data e hora
 public void writeLogg([String message]);
