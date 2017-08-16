@@ -103,15 +103,12 @@ System.out.println("");
 ```Java
 // Criando um registro com nome padrão
 Logg l = new Logg();
-l.writeLogg("Olá, mundo!");
 
 // Criando um registro com nome customizado
 Logg o = new Logg("CustomLogg.txt");
-o.writeLogg("Olá, mundo!");
 
 // Criando um registro com nome e caminho customizado
 Logg g = new Logg("/home/user/CustomLogg.txt");
-g.writeLogg("Olá, mundo!");
 ```
 
 ##### A classe possui duas maneiras de você inserir uma mensagem no arquivo de registro: Sem data e hora ou com data e hora inseridos.
