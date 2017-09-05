@@ -102,6 +102,9 @@ public class EDownloaderInfo {
 		try {
 			URL u = new URL(albumURL);
 			if(u.getAuthority().equals("e-hentai.org")) {
+				// Caso o usuário insira algo além da primeira página
+				// --------------------------------------------------
+				albumURL = albumURL.replaceAll("\\?p=.*", "");
 				return true;
 			}
 			else {
