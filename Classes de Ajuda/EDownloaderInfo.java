@@ -32,7 +32,7 @@ import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
-// VERSÃO 1.0
+// VERSÃO 1.1
 
 public class EDownloaderInfo {
 	// Propriedades privadas
@@ -50,13 +50,21 @@ public class EDownloaderInfo {
 	
 	private List<String> imagePages = new ArrayList<String>();
 	private List<String> albumPages = new ArrayList<String>();
-	private List<String> imageLinks = new ArrayList<String>();
+	
+	// As propriedades abaixo poderão retornar
+	// ---------------------------------------
+	private ArrayList<String> imageLinks = new ArrayList<String>();
 	
 	private String albumName = "";
+	private String albumLanguage = "";
+	private String uploadDate = "";
+	private String uploader = "";
+	private String fileSize = "";
 	private String error = "";
 	
 	private int pages = 0;
 	
+	private boolean isTranslated = false;
 	private boolean isOk = false;
 	
 	// Construtor da Classe
@@ -81,6 +89,10 @@ public class EDownloaderInfo {
 			doc = Jsoup.connect(albumURL).cookie("nw", "1").get();
 			albumName = String.format("%s", doc.title()).replace(" - E-Hentai Galleries", "");
 			
+			pGetAlbumLanguage();
+			pGetUploader();
+			pGetUploadDate();
+			pGetFileSize();
 			pGetAlbumPages();
 			pGetImagePages();
 			pGetImageLinks();
@@ -97,13 +109,13 @@ public class EDownloaderInfo {
 	}
 	
 	// Verificando se a URL pertence ao site
-	// =====================================
+	// -------------------------------------
 	private boolean checkURLDomain() {
 		try {
 			URL u = new URL(albumURL);
 			if(u.getAuthority().equals("e-hentai.org")) {
-				// Caso o usuário insira algo além da primeira página
-				// --------------------------------------------------
+				// Caso o usuário insira além da primeira página
+				// ---------------------------------------------
 				albumURL = albumURL.replaceAll("\\?p=.*", "");
 				return true;
 			}
@@ -113,6 +125,104 @@ public class EDownloaderInfo {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	// Resgatando idioma do álbum
+	// --------------------------
+	private void pGetAlbumLanguage() {
+		links = doc.select("div[id=gdd]");
+		
+		for(Element e : links) {
+			Elements table = e.getElementsByTag("table");
+			
+			for(Element t : table) {
+				Elements row = t.getElementsByTag("tr");
+				
+				for(Element l : row) {
+					Elements lang = l.getElementsByClass("gdt2");
+					Elements langDescr = l.getElementsByClass("gdt1");
+					
+					int i = 0;
+					for(Element ll : langDescr) {
+						if(ll.text().toString().contains("Language")) {
+							if(lang.get(i).text().toString().contains("TR")) {
+								isTranslated = true;
+							}
+							
+							albumLanguage = lang.get(i)
+									.text()
+									.toString()
+									.replace(" &nbsp;", "")
+									.replace("TR", "");
+							return;
+						}
+						
+						i += 1;
+					}
+				}
+			}
+		}
+	}
+	
+	// Resgatando nome do uploader
+	// ---------------------------
+	private void pGetUploader() {
+		links = doc.select("div[id=gdn]");
+		
+		for(Element e : links) {
+			Elements uplName = e.getElementsByTag("a");
+			uploader = uplName.text().toString();
+		}
+	}
+	
+	// Resgatando data do upload
+	// -------------------------
+	private void pGetUploadDate() {
+		links = doc.select("div[id=gdd]");
+		
+		for(Element e : links) {
+			Elements table = e.getElementsByTag("table");
+			
+			for(Element t : table) {
+				Elements row = t.getElementsByTag("tr");
+				
+				for(Element d : row) {
+					Elements date = d.getElementsByClass("gdt2");
+					
+					for(Element dd : date) {
+						uploadDate = dd.text().toString()
+								.replace("-", "/")
+								.replace(" ", " - ");
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	// Resgatando tamanho do álbum
+	// ---------------------------
+	private void pGetFileSize() {
+		links = doc.select("div[id=gdd]");
+		String bytes[] = {"B", "KB", "MB", "GB", "TB"};
+		
+		for(Element e : links) {
+			Elements table = e.getElementsByTag("table");
+			
+			for(Element t : table) {
+				Elements row = t.getElementsByTag("tr");
+				
+				for(Element f : row) {
+					Elements fs = f.getElementsByClass("gdt2");
+					
+					for(String b : bytes) {
+						if(fs.text().toString().endsWith(b)) {
+							fileSize = fs.text().toString();
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -194,7 +304,7 @@ public class EDownloaderInfo {
 	
 	// Resgatando link absoluto das imagens
 	// ------------------------------------
-	public List<String> getImages() {
+	public ArrayList<String> getImages() {
 		return imageLinks;
 	}
 	
@@ -208,6 +318,36 @@ public class EDownloaderInfo {
 	// ------------------------
 	public String getAlbumName() {
 		return albumName;
+	}
+	
+	// Resgatando idioma do álbum
+	// --------------------------
+	public String getAlbumLanguage() {
+		return albumLanguage;
+	}
+	
+	// Verificando se o álbum é uma tradução
+	// -------------------------------------
+	public boolean isTranslated() {
+		return isTranslated;
+	}
+	
+	// Resgatando nome do uploader
+	// ---------------------------
+	public String getUploader() {
+		return uploader;
+	}
+	
+	// Resgatando data do upload
+	// -------------------------
+	public String getUploadDate() {
+		return uploadDate;
+	}
+	
+	// Resgatando tamanho do álbum
+	// ---------------------------
+	public String getFileSize() {
+		return fileSize;
 	}
 	
 	// Resgatando mensagem de erro
