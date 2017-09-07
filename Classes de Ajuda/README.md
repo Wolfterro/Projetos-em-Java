@@ -153,7 +153,7 @@ Esta é uma mensagem sem data e hora!
 #### Descrição:
 
 ##### Esta pequena classe possui a função de resgatar as informações disponíveis nos álbuns do website e-hentai.
-##### Esta classe permite, por exemplo, obter o endereço de todas as imagens disponíveis no álbum, o nome do álbum e a quantidade de imagens disponíveis no álbum. Com isso, será possível baixar as imagens utilizando os endereços resgatados.
+##### Esta classe permite, por exemplo, obter o endereço de todas as imagens disponíveis no álbum, o nome do álbum, o idioma do álbum, se foi traduzido ou não, o uploader, a data do upload, o tamanho do álbum e a quantidade de imagens disponíveis no álbum. Com isso, será possível baixar as imagens utilizando os endereços resgatados.
 ##### Para isso, a classe utiliza a biblioteca [org.jsoup](https://github.com/jhy/jsoup) para obter estas informações diretamente do álbum.
 
 ##### É possível inicializar o objeto EDownloaderInfo utilizando apenas a URL do álbum em String da seguinte maneira:
@@ -175,13 +175,28 @@ e.getInfo();
 public boolean isSuccessful();
 
 // Resgata link absoluto das imagens
-public List<String> getImages();
+public ArrayList<String> getImages();
 
 // Resgata número de páginas (imagens) do álbum
 public int getAlbumSize();
 
 // Resgata nome do álbum
 public String getAlbumName();
+
+// Resgata o idioma do álbum
+public String getAlbumLanguage();
+
+// Verificando se o álbum é uma tradução
+public boolean isTranslated();
+
+// Resgatando nome do uploader
+public String getUploader();
+
+// Resgatando data do upload (yyyy/MM/dd - HH:mm)
+public String getUploadDate();
+
+// Resgatando tamanho do álbum (arquivos)
+public String getFileSize();
 
 // Resgata mensagem de erro (se houver, caso contrário retorna String vazia)
 public String getError();
@@ -199,9 +214,14 @@ e.getInfo();
 
 if(e.isSuccessful()) {
     System.out.println("Nome do álbum: " + e.getAlbumName());
+    System.out.println("Idioma: " + e.getAlbumLanguage());
+    System.out.println("Tradução: " + e.isTranslated());
+    System.out.println("Uploader: " + e.getUploader());
+    System.out.println("Data: " + e.getUploadDate());
+    System.out.println("Tamanho: " + e.getFileSize());
     System.out.println("Número de páginas: " + e.getAlbumSize());
     
-    System.out.println("Link absoluto das imagens:");
+    System.out.println("\nLink absoluto das imagens:");
     System.out.println("--------------------------");
     
     For(String img : e.getImages()) {
