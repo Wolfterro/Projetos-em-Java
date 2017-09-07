@@ -125,6 +125,9 @@ public class EDownloaderInfo {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
